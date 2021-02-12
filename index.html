@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Probability and Chi-squared test of frequencies</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Probability and Chi-squared test of frequencies">
+  <meta name="author" content="Dr Axel Barlow">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/custom.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+    
+  <slide class="nobackground">
+    <article class="flexbox vcenter">
+      <span>
+        <img width='300px' src="assets/img/NTU_open-graph.png">
+      </span>
+    </article>
+  </slide>
+    <slide class="title-slide segue nobackground">
+  
+  <aside class="gdbar">
+    <img src="assets/img/ntu-shield.png">
+  </aside>
+  
+  <hgroup class="auto-fadein">
+    <h1>Probability and Chi-squared test of frequencies</h1>
+    <h2>BIOL40102: Research Methods and Bioethics</h2>
+    <p>Dr Axel Barlow<br/>email: axel.barlow@ntu.ac.uk</p>
+  </hgroup>
+  
+    <a href="https://github.com/draxelbarlow/BIOL40102_statistics2/zipball/gh-pages" class="example">
+     Download
+    </a>
+  
+  <article></article>  
+      
+  <footer class = 'license'>
+    <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/'>
+    <img width = '80px' src = 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png'>
+    </a>
+  </footer>
+  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  
+  <article data-timings="">
+    <!-- adding bold and italic options -->
+
+<style>
+em {
+  font-style: italic
+}
+strong {
+  font-weight: bold;
+}
+</style>
+
+<h2>In this lecture...</h2>
+
+<ul class = "build incremental">
+<li>Probability</li>
+<li>Hypotheses</li>
+<li>Chi-squared test of frequencies</li>
+<li>Chi-squared test of independence</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="segue dark" id="slide-2" style="background:;">
+  
+  <hgroup>
+    <h2>How likely is an event to occur?</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>Probability</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>A numerical description of how likely an event is to occur</li>
+<li>Typically presented as a number between 0 to 1</li>
+<li>Or as a percentage</li>
+</ul>
+
+<p><strong>Different interpretations</strong></p>
+
+<ul>
+<li><em>Frequentist</em>, the observed frequency if the experiment was repeated indefinitely</li>
+<li><em>Subjectivist</em>, the degree of belief in a system</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>Mathematical features of probability</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <p>For a fair dice, the probability of rolling each number is 0.167</p>
+
+<p><img src="./assets/img/dice.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" width="70%" style="display: block; margin: auto;" /></p>
+
+<ul>
+<li><strong>We can calculate the probability of a series, or sequence, of events by multiplying their probabilities</strong></li>
+<li>probability of rolling 6 twice = 0.167 x 0.167 = 0.0278</li>
+<li><strong>The probability of all events sum to 1</strong></li>
+<li>0.167 + 0.167 + 0.167 + 0.167 + 0.167 + 0.167 = 1</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  
+  <hgroup>
+    <h2>Examples: DNA sequencing error</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Illumina sequencing platforms have an error rate of 1%</li>
+<li>So every sequenced nucleotide has an error probability of 0.01</li>
+<li>Probability of being correct is 0.99</li>
+</ul>
+
+<div style='float:left;width:48%;' class='centered'>
+  <p><code>AGTCTGGTACCG</code></p>
+
+<p><code>AGTCTGGTACCG</code></p>
+
+<ul>
+<li>Error probability at 2x coverage 0.01 * 0.01 = 0.0001</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="./assets/img/hiseq-x-left.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="100%" style="display: block; margin: auto 0 auto auto;" /></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  
+  <hgroup>
+    <h2>Examples: DNA sequencing error</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Oxford nanopore platforms have an error rate of 10%</li>
+<li>So every sequenced nucleotide has an error probability of 0.1</li>
+<li>Probability of being correct is 0.9</li>
+</ul>
+
+<div style='float:left;width:48%;' class='centered'>
+  <p><code>AGTCTGGTACCG</code></p>
+
+<p><code>AGTCTGGTACCG</code></p>
+
+<ul>
+<li>Error probability at 2x coverage 0.1 * 0.1 = 0.01</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="./assets/img/nanopore.jpeg" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="100%" style="display: block; margin: auto 0 auto auto;" /></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="" id="slide-7" style="background:white;">
+  
+  <hgroup>
+    <h2>Examples: DNA sequencing error</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Oxford nanopore platforms have an error rate of 10%</li>
+<li>So every sequenced nucleotide has an error probability of 0.1</li>
+<li>Probability of being correct is 0.9</li>
+</ul>
+
+<div style='float:left;width:48%;' class='centered'>
+  <p><code>AGTCTGGTACCG</code></p>
+
+<p><code>AGTCTGGTACCG</code></p>
+
+<ul>
+<li>Error probability at 2x coverage 0.1 * 0.1 = 0.01</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/fig/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="80%" /></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="" id="slide-8" style="background:white;">
+  
+  <hgroup>
+    <h2>Genotype frequencies</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>In a population, we can calculated the probability of observing genotypes at a diploid locus based on the allele frequencies </li>
+<li>(assuming random mating and no selection)</li>
+</ul>
+
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>Frequency A = 0.5</li>
+<li>Frequency B = 0.5</li>
+</ul>
+
+<p><code>Prob homA = 0.25</code></p>
+
+<p><code>Prob het = 0.25 + 0.25 = 0.5</code></p>
+
+<p><code>Prob homB = 0.25</code></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="./assets/img/mtDNA_tree.svg" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" width="70%" style="display: block; margin: auto;" /></p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="segue dark" id="slide-9" style="background:;">
+  
+  <hgroup>
+    <h2>Probability provides the basis for a question</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="slide-10" style="background:white;">
+  
+  <hgroup>
+    <h2>In science we call our questions hypotheses</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>A <code>hypothesis</code> (plural <code>hypotheses</code>) is a proposed explanation of something</li>
+<li>It must be <strong>testable</strong></li>
+<li>That means, we can predict different observations if the hypothesis is true or false</li>
+</ul>
+
+<p><img src="./assets/img/question-1015308.jpg" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="40%" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>We generally split the question into two:</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li><code>Null hypothesis</code>: there is no effect</li>
+<li><code>Alternate hypothesis</code>: there is an effect</li>
+<li>We try to reject or disprove the null hypothesis</li>
+<li>Then we can accept the alternate hypothesis</li>
+</ul>
+
+<p><img src="./assets/img/question-mark-2492009.jpg" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" width="70%" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>Example: human sex ratio</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <h3>You hypothesise that the human sex ratio at birth may be slighly different to the 50:50 ratio generally assumed</h3>
+
+<ul>
+<li>Null hypothesis: 50% males, 50% females</li>
+<li>Alternate hypothesis: % male and % female are different</li>
+</ul>
+
+<ul class = "build incremental">
+<li>The observed percentage turns out to be around 52.5%</li>
+<li>You reject the null hypothesis and accept the alternate hypothesis</li>
+<li>If 50% were observed, then you would fail to reject the null hypothesis</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="segue dark" id="slide-13" style="background:;">
+  
+  <hgroup>
+    <h2>Test of frequencies</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>Test of frequencies</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Probability theory allows us to predict the frequencies of events based on a particular prediction</li>
+<li>E.g. Probability of rolling each number on a dice is equal</li>
+<li>We can carry out an experiment to test our prediction</li>
+</ul>
+
+<h3>Problem</h3>
+
+<ul>
+<li>At small sample sizes, the frequencies will vary due to sampling effect</li>
+<li>We need a way to &quot;see through&quot; this sampling noise</li>
+<li><strong>What is the probability of observing frequencies X if the true frequencies are Y</strong></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>Chi-squared test of frequencies</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Tells us if the observed frequencies form a sample are consistent with our (pre-defined) expected frequencies</li>
+<li>Population example, allele frequencies A = 0.5, B = 0.5</li>
+<li>Null hypothesis: random mating and no selection</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>genotype</th>
+<th>observed</th>
+<th>expected</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>homA</td>
+<td>22</td>
+<td>25</td>
+</tr>
+<tr>
+<td>het</td>
+<td>53</td>
+<td>50</td>
+</tr>
+<tr>
+<td>homB</td>
+<td>25</td>
+<td>25</td>
+</tr>
+</tbody></table>
+
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  obs
+## X-squared = 0.54, df = 2, p-value = 0.7634
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>Chi-squared test of frequencies</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Tells us if the observed frequencies form a sample are consistent with our (pre-defined) expected frequencies</li>
+<li>Population example, allele frequencies A = 0.5, B = 0.5</li>
+<li>Null hypothesis: random mating and no selection</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>genotype</th>
+<th>observed</th>
+<th>expected</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>homA</td>
+<td>40</td>
+<td>25</td>
+</tr>
+<tr>
+<td>het</td>
+<td>20</td>
+<td>50</td>
+</tr>
+<tr>
+<td>homB</td>
+<td>40</td>
+<td>25</td>
+</tr>
+</tbody></table>
+
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  obs
+## X-squared = 36, df = 2, p-value = 1.523e-08
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>Chi-squared test: uses and assumptions</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Tells us if the observed frequencies differ from the expected</li>
+<li>Useful in situations where we can predict frequencies under a particular set or rules or processes</li>
+</ul>
+
+<h3>Assumptions</h3>
+
+<ul>
+<li>Counts of categorical variables</li>
+<li>Categories are mutually exclusive</li>
+<li>each subject = 1 count</li>
+<li>The data are collected at random</li>
+<li>The <em>expected</em> counts should be 5 or more in 80% of cases</li>
+<li>No case should have an expected count &lt; 1</li>
+<li>This helps determine the minimum sample size</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="segue dark" id="slide-18" style="background:;">
+  
+  <hgroup>
+    <h2>What if we don&#39;t know the expected frequencies?</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>What if we don&#39;t know the expected frequencies?</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Example - in a drug trial with test and control (placebo) groups, we don&#39;t know the expected frequencies</li>
+<li>We can display these results in a <strong>Contingency table</strong></li>
+</ul>
+
+<table><thead>
+<tr>
+<th align="left"></th>
+<th align="right">negative</th>
+<th align="right">positive</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">test</td>
+<td align="right">50</td>
+<td align="right">450</td>
+</tr>
+<tr>
+<td align="left">control</td>
+<td align="right">100</td>
+<td align="right">400</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>We can use a <strong>Chi-squared test of differences</strong> to see if the frequencies are different</li>
+</ul>
+
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
+## 
+## data:  table(trials_data$group, trials_data$outcome)
+## X-squared = 17.19, df = 1, p-value = 3.381e-05
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  
+  <hgroup>
+    <h2>In this lecture...</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <ul>
+<li>Probability</li>
+<li>Hypotheses</li>
+<li>Chi-squared test of frequencies</li>
+<li>Chi-squared test of independence</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="thank-you-slide segue nobackground" id="slide-21">
+  <aside class="gdbar right"><img src="assets/img/ntu-shield.png"></aside>
+  <article class="flexbox vleft auto-fadein">
+    <h2>Next time</h2>
+    <p><strong>Non-Parametric Tests for Differences</strong></p>
+
+  </article>
+
+  <p class="auto-fadein" data-config-contact="">
+    
+  </p>
+</slide>
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='NA'>
+         1
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='How likely is an event to occur?'>
+         2
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Probability'>
+         3
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Mathematical features of probability'>
+         4
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Examples: DNA sequencing error'>
+         5
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Examples: DNA sequencing error'>
+         6
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Examples: DNA sequencing error'>
+         7
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Genotype frequencies'>
+         8
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Probability provides the basis for a question'>
+         9
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='In science we call our questions hypotheses'>
+         10
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='We generally split the question into two:'>
+         11
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Example: human sex ratio'>
+         12
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Test of frequencies'>
+         13
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Test of frequencies'>
+         14
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Chi-squared test of frequencies'>
+         15
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Chi-squared test of frequencies'>
+         16
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Chi-squared test: uses and assumptions'>
+         17
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='What if we don&#39;t know the expected frequencies?'>
+         18
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='What if we don&#39;t know the expected frequencies?'>
+         19
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='In this lecture...'>
+         20
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Next time'>
+         21
+      </a>
+    </li>
+    
+    </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
